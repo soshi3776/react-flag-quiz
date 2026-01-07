@@ -1,0 +1,25 @@
+{
+  "name": "react-flag-quiz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soshi3776/react-flag-quiz.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/soshi3776/react-flag-quiz/issues"
+  },
+  "homepage": "https://github.com/soshi3776/react-flag-quiz#readme",
+  "devDependencies": {
+    "vite": "^7.3.1"
+  }
+}
