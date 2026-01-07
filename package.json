@@ -20,6 +20,11 @@
   },
   "homepage": "https://github.com/soshi3776/react-flag-quiz#readme",
   "devDependencies": {
+    "@vitejs/plugin-react": "^5.1.2",
     "vite": "^7.3.1"
+  },
+  "dependencies": {
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
   }
 }

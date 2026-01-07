@@ -1,0 +1,66 @@
+body {
+  margin: 0;
+  background-color: #e2e2e2;
+  font-family: sans-serif;
+}
+
+.screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flag-wrapper {
+  position: relative;
+}
+
+.flag {
+  width: 300px;
+  margin: 16px auto;
+  display: block;
+}
+
+.mark {
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 200px;
+  pointer-events: none;
+}
+
+.mark.ok {
+  color: red;
+}
+
+.mark.ng {
+  color: blue;
+}
+
+.choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+button {
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+}
+
+.message {
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+.next {
+  margin-top: 16px;
+}
