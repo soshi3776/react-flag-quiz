@@ -29,6 +29,7 @@ export default function App() {
   const [message, setMessage] = useState("");
   const [choices, setChoices] = useState([]);
   const [wrongList, setWrongList] = useState([]);
+  const [isReview, setIsReview] = useState(false);
 
   const current = quiz[index];
 
@@ -42,6 +43,7 @@ export default function App() {
     setAnswered(false);
     setResult(null);
     setMessage("");
+    setIsReview(false);
     setStarted(true);
   }
 
@@ -64,7 +66,10 @@ export default function App() {
   function next() {
     const nextIndex = index + 1;
     if (nextIndex === quiz.length) {
-      localStorage.setItem("lastScore", score);
+      if (!isReview) {
+        localStorage.setItem("lastScore", score);
+      }
+      setIndex(nextIndex);
       return;
     }
 
@@ -90,6 +95,7 @@ export default function App() {
     setResult(null);
     setMessage("");
     setWrongList([]);
+    setIsReview(true);
   }
 
   const lastScore = localStorage.getItem("lastScore");
@@ -116,15 +122,17 @@ export default function App() {
           <h1>結果🎉</h1>
           <p>{score} / {quiz.length} 正解</p>
 
-          {wrongList.length > 0 && (
-            <button onClick={reviewWrong}>
-              間違えた問題を復習 ▶
-            </button>
-          )}
+          <div className="result-buttons">
+            {wrongList.length > 0 && (
+              <button onClick={reviewWrong}>
+                間違えた問題を復習 ▶
+              </button>
+            )}
 
-          <button onClick={retry} className="retry">
-            最初から
-          </button>
+            <button onClick={retry} className="retry">
+              最初から ▶
+            </button>
+          </div>
 
         </div>
       </div>
