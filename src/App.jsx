@@ -21,13 +21,14 @@ function makeChoices(answer) {
 
 export default function App() {
   const [started, setStarted] = useState(false);
-  const [quiz, setQuiz] = useState(shuffle(countries).slice(0, 20));
+  const [quiz, setQuiz] = useState([]);
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [answered, setAnswered] = useState(false);
   const [result, setResult] = useState(null);
   const [message, setMessage] = useState("");
-  const [choices, setChoices] = useState(makeChoices(quiz[0]));
+  const [choices, setChoices] = useState([]);
+  const [wrongList, setWrongList] = useState([]);
 
   const current = quiz[index];
 
@@ -36,6 +37,7 @@ export default function App() {
     setQuiz(newQuiz);
     setIndex(0);
     setScore(0);
+    setWrongList([]);
     setChoices(makeChoices(newQuiz[0]));
     setAnswered(false);
     setResult(null);
@@ -53,6 +55,7 @@ export default function App() {
     } else {
       setResult("ng");
       setMessage(`不正解😢正解は「${current.name}」`);
+      setWrongList([...wrongList, current]);
     }
 
     setAnswered(true);
@@ -61,7 +64,7 @@ export default function App() {
   function next() {
     const nextIndex = index + 1;
     if (nextIndex === quiz.length) {
-      setIndex(nextIndex);
+      localStorage.setItem("lastScore", score);
       return;
     }
 
@@ -76,12 +79,28 @@ export default function App() {
     setStarted(false);
   }
 
+  function reviewWrong() {
+    if (wrongList.length === 0) return;
+
+    setQuiz(wrongList);
+    setIndex(0);
+    setScore(0);
+    setChoices(makeChoices(wrongList[0]));
+    setAnswered(false);
+    setResult(null);
+    setMessage("");
+    setWrongList([]);
+  }
+
+  const lastScore = localStorage.getItem("lastScore");
+
   if (!started) {
     return (
       <div className="screen">
         <div className="card">
           <h1>🌍国旗クイズ🌎</h1>
           <p>国旗を見て国名を選ぼう！（全20問）</p>
+          {lastScore && <p>前回のスコア：{lastScore} / 20</p>}
           <button className="start" onClick={start}>
             スタート ▶
           </button>
@@ -96,8 +115,15 @@ export default function App() {
         <div className="card">
           <h1>結果🎉</h1>
           <p>{score} / {quiz.length} 正解</p>
+
+          {wrongList.length > 0 && (
+            <button onClick={reviewWrong}>
+              間違えた問題を復習 ▶
+            </button>
+          )}
+
           <button onClick={retry} className="retry">
-            再挑戦
+            最初から
           </button>
 
         </div>
