@@ -37,12 +37,14 @@
     "yallist": "^3.1.1"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^5.1.2"
+    "@vitejs/plugin-react": "^5.1.2",
+    "gh-pages": "^6.3.0"
   },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -54,5 +56,5 @@
   "bugs": {
     "url": "https://github.com/soshi3776/react-flag-quiz/issues"
   },
-  "homepage": "https://github.com/soshi3776/react-flag-quiz#readme"
+  "homepage": "https://soshi3776.github.io/react-flag-quiz/"
 }
