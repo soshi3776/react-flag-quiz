@@ -16,7 +16,7 @@ function makeChoices(answer) {
     countries.filter(c => c.code !== answer.code)
   ).slice(0, 3);
 
-  return shuffle([answer, others[0], others[1], others[2]]);
+  return shuffle([answer, ...others]);
 }
 
 export default function App() {
@@ -134,7 +134,7 @@ export default function App() {
   return (
     <div className="screen">
       <div className="card">
-        <h1>国旗クイズ（{index + 1} / 20）</h1>
+        <h1>国旗クイズ（{index + 1} / {quiz.length}）</h1>
 
         <div className="flag-wrapper">
           <img src={current.flag} alt="flag" className="flag" />
